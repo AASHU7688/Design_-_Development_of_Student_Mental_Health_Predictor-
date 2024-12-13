@@ -37,3 +37,42 @@ Backend: Django
 Database: SQLite
 
 Machine Learning: Logistic Regression (Multiclass Classifier)
+
+# Requirement for the project
+Django Framework:
+
+Version: 4.x or higher (adjust based on the project).
+Reason: Leverages modern Django features like class-based views and enhanced ORM capabilities.
+
+Python:
+
+Version: 3.10 or higher.
+Reason: Compatible with modern libraries, type hints, and async support.
+
+# Libraries:
+
+NumPy: >=1.21.0
+For numerical operations in prediction functions.
+joblib: >=1.2.0
+For loading serialized machine learning models.
+LangChain Ollama: >=0.1.0
+Handles interaction with the Ollama LLM.
+LangChain Core Prompts: >=0.1.0
+To manage prompt templates for the LLM.
+Django Session Middleware: Ensure it is enabled for session-based context storage.
+Ollama Version:
+
+Version: 3.2 (model-specific: "llama3.2").
+Reason: Supports advanced health-related queries with a large knowledge base.
+Front-End Libraries:
+
+HTML/CSS for templates.
+Optional: Bootstrap 5.x for responsive design.
+Database:
+
+SQLite (default for development) or PostgreSQL for production.
+Deployment Requirements:
+
+Gunicorn: >=20.0.0
+WhiteNoise: >=5.3.0 (for serving static files in production).
+
