@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* Main content area styling */
+    .body-content {
+        height: 100vh; /* Full viewport height for the content */
+        background-image: url("static/blue-removebg-preview.png"); /* Use the generated image */
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: flex-start; /* Align content to the left */
+        padding-left: 120px; /* Left margin */
+        animation: fadeIn 1.2s ease; /* Fade-in effect for the main content */
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Container styling for the text and button */
+    .content-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 40px;
+        height: 400px; /* Set a fixed height for the container */
+        box-shadow: 0 0 20px rgba(0, 86, 179, 0.2), 0 0 40px rgba(0, 86, 179, 0.5); /* Light effect around the box with blue shade */
+        text-align: center; /* Center-align text and button */
+        transition: box-shadow 0.3s ease; /* Transition for hover effect */
+        position: relative; /* Position relative for inner effects */
+        z-index: 1; /* Ensure it's above background effects */
+        margin-top: 90px; /* Add margin to align it lower beside the center */
+    }
+
+    /* Styling for the quote section */
+    .quote {
+        max-width: 600px;
+        animation: textSlideIn 1.5s ease; /* Slide-in effect for text */
+    }
+
+    /* Slide-in animation for text */
+    @keyframes textSlideIn {
+        from { transform: translateX(-30px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .p1 {
+        font-size: 50px;
+        color: #0056b3;
+        text-shadow: 0px 0px 8px white;
+        margin-bottom: 15px;
+    }
+
+    .p2 {
+        font-size: 25px;
+        color: #0056b3;
+        text-shadow: 0px 0px 5px white;
+        margin-bottom: 20px;
+    }
+
+    .p3 {
+        font-size: 40px;
+        color: #0056b3;
+        text-shadow: 0px 0px 8px white;
+    }
+
+    span {
+        color: #ffcc00;
+        animation: pulse 1.5s ease infinite; /* Pulse animation for highlighted text */
+    }
+
+    /* Pulse animation for highlighted text */
+    @keyframes pulse {
+        0%, 100% { color: #ffcc00; }
+        50% { color: #ffe066; }
+    }
+
+    /* Button styling */
+    .button-container {
+        margin-top: 20px;
+        animation: buttonSlideIn 1.8s ease forwards; /* Slide-in animation for button */
+        opacity: 0; /* Start hidden and fade in */
+    }
+
+    /* Slide-in animation for button */
+    @keyframes buttonSlideIn {
+        from { transform: translateX(-20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .button-container a {
+        text-decoration: none;
+    }
+
+    button {
+        color: #0056b3;
+        font-size: 20px;
+        padding: 10px 30px;
+        background-color: white;
+        border: 2px solid #0056b3;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Button hover effect with gradient overlay */
+    button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, #ffcc00, #0056b3);
+        transition: all 0.4s ease;
+        z-index: 0;
+    }
+
+    button:hover::before {
+        left: 0;
+    }
+
+    button:hover {
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(0, 86, 179, 0.4);
+    }
+
+    button span {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Hover effect for the container */
+    .content-container:hover {
+        box-shadow: 0 0 30px rgba(0, 86, 179, 0.8), 0 0 60px rgba(0, 86, 179, 0.5); /* Brighten the box shadow on hover */
+    }
+
+</style>
+
+<main class="body-content">
+    <div class="content-container">
+        <div class="quote">
+            <p class="p1">Check Your Mental State</p> 
+            <p class="p2">with a personalized mental state predictor</p>
+            <p class="p3">With <span>ZERO</span> confusion</p>           
+        </div>
+        <div class="button-container">
+            <a href="/prediction">
+               <button><span>Get Started</span></button>
+            </a>
+        </div>
+    </div>
+    {% comment %} <script src="//code.tidio.co/3lojhggounbweevyuom915jkrm3ywalq.js" async></script> {% endcomment %}
+</main>
+
+{% endblock body %}

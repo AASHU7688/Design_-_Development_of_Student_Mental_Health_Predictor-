@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% block title %}Chatbot{% endblock title %}
+
+{% block body %}
+<style>
+    /* Main content area styling */
+    .body-content {
+        height: 100vh;
+        background-image: url("static/blue-removebg-preview.png");
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+        animation: fadeIn 1.2s ease;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Chatbox container styling */
+    .chatbot-container {
+        width: 45%;
+        max-width: 500px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 86, 179, 0.2), 0 0 40px rgba(0, 86, 179, 0.5);
+        position: relative;
+        overflow: hidden;
+        animation: slideUp 1s ease;
+        margin-left: 120px;
+        margin-top: 50px;
+    }
+
+    /* Slide-up animation */
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Title styling */
+    .chatbot-title {
+        font-size: 2em;
+        color: #0056b3;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Chat area styling */
+    .chat-area {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #0056b3;
+        border-radius: 10px;
+        background: #f9f9f9;
+    }
+
+    .message {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 8px;
+        max-width: 80%;
+    }
+
+    .user-message {
+        background-color: #0056b3;
+        color: white;
+        align-self: flex-end; /* Align user messages to the right */
+    }
+
+    .bot-message {
+        background-color: #f1f1f1;
+        color: #000;
+        align-self: flex-start; /* Align bot messages to the left */
+    }
+
+    .message img {
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+    }
+
+    .user-message img {
+        margin-left: 10px; /* Adjust alignment for user images */
+        margin-right: 0;
+    }
+
+    .input-container {
+        display: flex;
+        margin-top: 15px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .input-container textarea {
+        font-size: 1em;
+        padding: 10px;
+        border: 2px solid #0056b3;
+        border-radius: 10px;
+        outline: none;
+        transition: border-color 0.3s;
+        resize: none;
+    }
+
+    .input-container textarea:focus {
+        border-color: #ffcc00;
+    }
+
+    .input-container button {
+        color: #0056b3;
+        font-size: 1.2em;
+        padding: 10px 25px;
+        background-color: white;
+        border: 2px solid #0056b3;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .input-container button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, #ffcc00, #0056b3);
+        transition: all 0.4s ease;
+        z-index: 0;
+    }
+
+    .input-container button:hover::before {
+        left: 0;
+    }
+
+    .input-container button:hover {
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(0, 86, 179, 0.4);
+    }
+
+    .input-container button span {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Hover effect for the container */
+    .chatbot-container:hover {
+        box-shadow: 0 0 30px rgba(0, 86, 179, 0.8), 0 0 60px rgba(0, 86, 179, 0.5);
+    }
+
+    /* Lighting effect */
+    .lighting {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 30%, transparent 70%);
+        pointer-events: none;
+        animation: pulse 3s infinite alternate;
+    }
+
+    /* Pulse animation for lighting effect */
+    @keyframes pulse {
+        0% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 0.9;
+        }
+    }
+</style>
+
+<main class="body-content">
+    <div class="chatbot-container">
+        <!-- Lighting effect for visual appeal -->
+        <div class="lighting"></div>
+        <h1 class="chatbot-title">Chat with Chaitanya</h1>
+        
+        <!-- Chat area displaying chat history -->
+        <div class="chat-area">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message {% if message.sender == 'User' %}user-message{% else %}bot-message{% endif %}">
+                        {% if message.sender == 'User' %}
+                            <img src="static/userlogo.jpg" alt="User Avatar">
+                            <div>{{ message.text|safe }}</div>
+                        {% else %}
+                            <img src="static/fianllogo.png" alt="Bot Avatar">
+                            <div>{{ message.text|safe }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-messages">Start a conversation with the chatbot!</div>
+            {% endif %}
+        </div>
+
+        <!-- Input form to send messages -->
+        <form class="input-container" method="POST" id="chat-form">
+            {% csrf_token %}
+            <textarea 
+                id="user-input" 
+                name="user_input" 
+                rows="3" 
+                placeholder="Type your message here..." 
+                required></textarea>
+            <button type="submit">
+                <span>Send</span>
+            </button>
+        </form>
+    </div>
+</main>
+
+<script>
+    document.getElementById('user-input').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent default behavior of adding a new line
+            document.getElementById('chat-form').submit(); // Submit the form
+        }
+    });
+</script>
+
+{% endblock body %}

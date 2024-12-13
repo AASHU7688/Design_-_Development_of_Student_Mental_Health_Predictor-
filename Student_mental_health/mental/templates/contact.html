@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block body %}
+<style>
+    /* Main content area styling */
+    .body-content {
+        height: 100vh; /* Full viewport height */
+        background-image: url("static/blue-removebg-preview.png"); /* Background image */
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: flex-start; /* Align content to the left */
+        align-items: center;
+        padding: 20px;
+        animation: fadeIn 1.2s ease; /* Fade-in effect */
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Contact form container styling */
+    .contact-container {
+        width: 45%; /* Smaller width for the box */
+        max-width: 500px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 86, 179, 0.2), 0 0 40px rgba(0, 86, 179, 0.5); /* Light effect around the box with blue shade */
+        position: relative;
+        overflow: hidden;
+        animation: slideUp 1s ease;
+        margin-left: 120px; /* Shift the box a little to the right */
+        margin-top: 50px; /* Align it a bit lower beside the center */
+    }
+
+    /* Slide-up animation */
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Title styling */
+    .contact-title {
+        font-size: 2em;
+        color: #0056b3;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Contact form styling */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Input field styling */
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 1em;
+        padding: 8px;
+        border: 2px solid #0056b3;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #ffcc00;
+    }
+
+    /* Button styling */
+    .contact-form button {
+        color: #0056b3;
+        font-size: 1.2em;
+        padding: 10px 25px;
+        background-color: white;
+        border: 2px solid #0056b3;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Button hover effect with gradient overlay */
+    .contact-form button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, #ffcc00, #0056b3);
+        transition: all 0.4s ease;
+        z-index: 0;
+    }
+
+    .contact-form button:hover::before {
+        left: 0;
+    }
+
+    .contact-form button:hover {
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(0, 86, 179, 0.4);
+    }
+
+    .contact-form button span {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Already have an account styling */
+    .already-account {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+    }
+
+    .already-account a {
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    .already-account a:hover {
+        text-decoration: underline;
+    }
+
+    /* Hover effect for the container */
+    .contact-container:hover {
+        box-shadow: 0 0 30px rgba(0, 86, 179, 0.8), 0 0 60px rgba(0, 86, 179, 0.5); /* Brighten the box shadow on hover */
+    }
+
+    /* Lighting effect */
+    .lighting {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 30%, transparent 70%);
+        pointer-events: none;
+        animation: pulse 3s infinite alternate;
+    }
+
+    /* Pulse animation for lighting effect */
+    @keyframes pulse {
+        0% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 0.9;
+        }
+    }
+
+</style>
+
+<main class="body-content">
+    <div class="contact-container">
+        <div class="lighting"></div> <!-- Added lighting effect -->
+        <h1 class="contact-title">Contact Us</h1>
+        <form class="contact-form" onsubmit="openGmail(event)">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="text" id="subject" placeholder="Subject" required>
+            <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit"><span>Send Message</span></button>
+        </form>
+    </div>
+</main>
+
+<script>
+    function openGmail(event) {
+        event.preventDefault(); // Prevent the form from submitting traditionally
+
+        // Collect form data
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
+
+        // Construct mailto URL
+        const mailtoLink = `mailto:tiwariaashutosh70@gmail.com,aakashkushwah2603@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+            `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        )}`;
+
+        // Open the mailto link
+        window.location.href = mailtoLink;
+    }
+</script>
+
+
+{% endblock body %}

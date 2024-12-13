@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f7;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 20px; /* Increased header height */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Add circular background logo */
+        .navbar .logo {
+            background-image: url("static/fianllogo.png"); /* Use the generated image */
+            background-size: cover;
+            background-position: center;
+            width: 40px; /* Adjust size */
+            height: 40px; /* Adjust size */
+            border-radius: 50%; /* Make the logo circular */
+            margin-right: 10px; /* Space between logo and text */
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .navbar ul li {
+            position: relative; /* Relative positioning for the box effect */
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 20px; /* Rounded corners for buttons */
+            transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1); /* Light background for contrast */
+            border: 2px solid transparent; /* Initial border */
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        }
+
+        /* Hover effect with glow */
+        .navbar ul li a:hover {
+            color: #ffcc00;
+            transform: translateY(-2px);
+            box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+            background-color: rgba(255, 255, 255, 0.2); /* Darker background on hover */
+            border: 2px solid #ffcc00; /* Border color on hover */
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 10px; /* Adjusted footer height */
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .footer-links {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 20px; /* Rounded corners for buttons */
+            transition: color 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1); /* Light background for contrast */
+            border: 2px solid transparent; /* Initial border */
+        }
+
+        /* Footer link hover effect */
+        .footer .footer-links a:hover {
+            color: #ffcc00;
+            box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+            background-color: rgba(255, 255, 255, 0.2); /* Darker background on hover */
+            border: 2px solid #ffcc00; /* Border color on hover */
+        }
+
+        /* Responsive Navbar and Footer */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px;
+            }
+
+            .navbar ul li a {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+
+            .footer .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer .footer-links a {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Extra responsiveness for smaller screens */
+        @media (max-width: 480px) {
+            .navbar .logo {
+                font-size: 24px;
+            }
+
+            .navbar ul li a {
+                font-size: 14px;
+            }
+
+            .footer .footer-links a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo"></div> <!-- Circular logo as background image -->
+        <div class="logo-text">Mental Health Predictor</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/chatbot">Chaitanya</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+        </ul>
+    </div>
+
+    {% block body %}{% endblock body %}
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/prediction">Prediction</a>
+            <a href="/about">About Us</a>
+        </div>
+        {% comment %} <div class="contact-info">
+            <p>Email: contact@mentalhealthpredictor.com | Phone: +123 456 7890</p>
+        </div> {% endcomment %}
+    </div>
+
+</body>
+</html>

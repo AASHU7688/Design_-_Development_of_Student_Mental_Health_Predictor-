@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block body %}
+<style>
+    /* Main content area styling */
+    .body-content {
+        height: 100vh; /* Full viewport height */
+        background-image: url("static/blue-removebg-preview.png"); /* Background image */
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: flex-start; /* Align content to the left */
+        align-items: center;
+        padding: 20px;
+        animation: fadeIn 1.2s ease; /* Fade-in effect */
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Login form container styling */
+    .login-container {
+        width: 45%; /* Smaller width for the box */
+        max-width: 500px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 86, 179, 0.2), 0 0 40px rgba(0, 86, 179, 0.5); /* Light effect around the box with blue shade */
+        position: relative;
+        overflow: hidden;
+        animation: slideUp 1s ease;
+        margin-left: 120px; /* Shift the box a little to the right */
+        margin-top: 50px; /* Align it a bit lower beside the center */
+    }
+
+    /* Slide-up animation */
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Title styling */
+    .login-title {
+        font-size: 2em;
+        color: #0056b3;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Login form styling */
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Input field styling */
+    .login-form input {
+        font-size: 1em;
+        padding: 8px;
+        border: 2px solid #0056b3;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .login-form input:focus {
+        border-color: #ffcc00;
+    }
+
+    /* Button styling */
+    .login-form button {
+        color: #0056b3;
+        font-size: 1.2em;
+        padding: 10px 25px;
+        background-color: white;
+        border: 2px solid #0056b3;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Button hover effect with gradient overlay */
+    .login-form button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, #ffcc00, #0056b3);
+        transition: all 0.4s ease;
+        z-index: 0;
+    }
+
+    .login-form button:hover::before {
+        left: 0;
+    }
+
+    .login-form button:hover {
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(0, 86, 179, 0.4);
+    }
+
+    .login-form button span {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Error message styling */
+    .error-message {
+        color: #ff0000;
+        font-size: 0.9em;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Don't have an account styling */
+    .no-account {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+    }
+
+    .no-account a {
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    .no-account a:hover {
+        text-decoration: underline;
+    }
+
+    /* Hover effect for the container */
+    .login-container:hover {
+        box-shadow: 0 0 30px rgba(0, 86, 179, 0.8), 0 0 60px rgba(0, 86, 179, 0.5); /* Brighten the box shadow on hover */
+    }
+
+</style>
+
+<main class="body-content">
+    <div class="login-container">
+        <h1 class="login-title">Log In</h1>
+        <form action="/login" method="POST" class="login-form">
+            {% csrf_token %}
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit"><span>Log In</span></button>
+            {% if error %}
+                <div class="error-message">{{ error }}</div>
+            {% endif %}
+        </form>
+        <div class="no-account">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+</main>
+
+{% endblock body %}

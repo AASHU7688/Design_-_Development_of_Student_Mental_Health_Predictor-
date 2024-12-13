@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block body %}
+<style>
+    /* Main container with shadow and light effect */
+    .about-container {
+        width: 80%;
+        max-width: 1200px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px 60px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn 1s ease;
+        margin: 40px auto;
+    }
+
+    /* Light effect on all four sides */
+    .about-container::before,
+    .about-container::after {
+        content: "";
+        position: absolute;
+        background: linear-gradient(to left, rgba(0, 86, 179, 0.3), rgba(255, 255, 255, 0));
+        box-shadow: 0px 0px 15px rgba(0, 86, 179, 0.3);
+        animation: lightGlow 2s infinite alternate;
+    }
+
+    .about-container::before {
+        top: 0;
+        left: -5px;
+        height: 100%;
+        width: 10px;
+    }
+
+    .about-container::after {
+        top: 0;
+        right: -5px;
+        height: 100%;
+        width: 10px;
+        transform: scaleX(-1); /* Mirrored glow effect */
+    }
+
+    /* Glow effect animation */
+    @keyframes lightGlow {
+        from {
+            opacity: 0.6;
+        }
+        to {
+            opacity: 0.9;
+        }
+    }
+
+    /* Title styling */
+    .about-title {
+        font-size: 3vw;
+        color: #0056b3;
+        text-align: center;
+        margin-bottom: 30px;
+        text-shadow: 0px 0px 8px white;
+    }
+
+    /* Description text */
+    .about-description {
+        max-width: 700px;
+        text-align: center;
+        font-size: 1.2vw;
+        color: #555;
+        margin-bottom: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Team section styling */
+    .team-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    /* Individual team member card styling */
+    .team-member {
+        width: 220px;
+        text-align: center;
+        background-color: #f3f4f7;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        transform: scale(1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        padding-bottom: 20px;
+        animation: slideUp 1s ease;
+    }
+
+    /* Slide-up animation */
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Image styling */
+    .team-member img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 4px solid #0056b3;
+    }
+
+    /* Name styling */
+    .member-name {
+        font-size: 1.5vw;
+        color: #0056b3;
+        margin-top: 10px;
+    }
+
+    /* Role styling */
+    .member-role {
+        font-size: 1.2vw;
+        color: #666;
+    }
+
+    /* Hover effect for the team member cards */
+    .team-member:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 6px 15px rgba(0, 86, 179, 0.3);
+    }
+
+    /* Hover effect for the container */
+    .about-container:hover {
+        box-shadow: 0 0 30px rgba(0, 86, 179, 0.8), 0 0 60px rgba(0, 86, 179, 0.5); /* Brighten the box shadow on hover */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .about-title {
+            font-size: 24px;
+        }
+
+        .about-description {
+            font-size: 16px;
+        }
+
+        .member-name, .member-role {
+            font-size: 18px;
+        }
+    }
+</style>
+
+<main class="about-content">
+    <div class="about-container">
+        <h1 class="about-title">About Us</h1>
+        <p class="about-description">
+            Welcome to Mental Health Predictor! Our team is committed to providing accurate mental state analysis through advanced machine learning models. Here are the faces behind the work!
+        </p>
+
+        <div class="team-section">
+            <!-- Team Member 1 -->
+            <div class="team-member">
+                <img src="static/myimage1.jpg" alt="Team Member 1">
+                <h2 class="member-name">Aashutosh Tiwari</h2>
+                <p class="member-role">Backend Developer</p>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-member">
+                <img src="static/Aakash11.jpg" alt="Team Member 2">
+                <h2 class="member-name">Aakash Kushwah</h2>
+                <p class="member-role">Backend Developer</p>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-member">
+                <img src="static/abhay1.jpg" alt="Team Member 3">
+                <h2 class="member-name">Abhay Solanki Rajput</h2>
+                <p class="member-role">Frontend Developer</p>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="team-member">
+                <img src="static/golu1.jpg" alt="Team Member 4">
+                <h2 class="member-name">Golu Dhakad</h2>
+                <p class="member-role">Frontend Developer</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock body %}
