@@ -89,6 +89,7 @@ WhiteNoise: >=5.3.0 (for serving static files in production).
 # Steps or command to run the project 
 
 1) Download the zip and extract the zip.
-2) Open terminal of the VSCode.
-3) Hit this command first on the terminal - cd mental
-4) Then next another command on the terminal after 3rd step - python manage.py runserver
+2) Open the extracted folder on the VSCode
+3) Open terminal of the VSCode.
+4) Hit this command first on the terminal - cd mental
+5) Then next another command on the terminal after 3rd step - python manage.py runserver
