@@ -1,0 +1,5 @@
+django
+numpy
+joblib
+langchain_ollama
+langchain_core
