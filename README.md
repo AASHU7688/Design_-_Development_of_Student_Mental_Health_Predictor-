@@ -15,6 +15,9 @@ Users input their details through an intuitive form on the web application.
 The data is processed and passed to the trained logistic regression model for predictions.
 The model predicts the user's mental health condition and displays it in an understandable format.
 Users can interact with the integrated chatbot for further queries and support.
+
+
+
 Technology Stack
 Frontend: HTML, CSS, JavaScript
 Backend: Django
